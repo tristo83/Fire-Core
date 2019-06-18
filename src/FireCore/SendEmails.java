@@ -19,6 +19,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import static FireCore.ForgotPassword.emailTextFeild;
+import java.util.Arrays;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -71,6 +73,54 @@ public class SendEmails {
             System.out.println(e);
 
         }
+
+    }
+
+    public static void emailReport() throws MessagingException {
+String[] value = new String[6];
+        
+       for (int i = 0; i < DisplaySearchData.jTable2_DisplayDataHistory.getRowCount(); i++){
+       for(int j = 0; j < DisplaySearchData.jTable2_DisplayDataHistory.getColumnCount(); j++ ){
+       
+        
+               
+               value[j] = DisplaySearchData.jTable2_DisplayDataHistory.getModel().getValueAt(i, j).toString();
+       
+      
+      if(j == 4){
+      
+      String test1 = value[0];
+      String test2 = value[1];
+      String test3 = value[2];
+      String test4 = value[3];
+      String test5 = value[4];
+      
+      String test6 = test1 + "  " + test2 + "  " + String.format("%-14s", test3) + "  " + String.format("%-26s", test4) + "    " + test5;
+      
+      
+      
+      
+      
+       System.out.println(test6);
+      }
+      
+      
+       
+       
+       
+       
+       }
+       
+       }
+       
+      
+        
+        
+     
+        
+        
+        
+       
 
     }
 
