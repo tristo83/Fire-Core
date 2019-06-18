@@ -8,6 +8,7 @@ package FireCore;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,7 +45,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
         panelSelect = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         conSelect = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        clearTableButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         pointZoneSelect = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -71,10 +72,10 @@ public class DisplaySearchData extends javax.swing.JFrame {
 
         conSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Fault", "Disable", "Enabled", "Alarm", "Pre Alarm", "Dirty Alert", "Reset" }));
 
-        jButton1.setText("<html><center>Clear Table</html>");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        clearTableButton.setText("<html><center>Clear Table</html>");
+        clearTableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clearTableButtonActionPerformed(evt);
             }
         });
 
@@ -131,7 +132,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(clearTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(174, 174, 174)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(csvReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -149,7 +150,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
                         .addComponent(panelSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(conSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(DbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(clearTableButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pointZoneSelect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,16 +258,20 @@ public class DisplaySearchData extends javax.swing.JFrame {
 
     }//GEN-LAST:event_DbSearchActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void clearTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTableButtonActionPerformed
         DefaultTableModel model;
         model = (DefaultTableModel) jTable2_DisplayDataHistory.getModel();
         
         model.setRowCount(0);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_clearTableButtonActionPerformed
 
     private void emailReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailReportActionPerformed
-       ReportCreation.emailReport();
+        try {
+            SendEmails.emailReport();
+        } catch (MessagingException ex) {
+            Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_emailReportActionPerformed
 
     private void csvReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvReportActionPerformed
@@ -314,10 +319,10 @@ public class DisplaySearchData extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DbSearch;
+    private javax.swing.JButton clearTableButton;
     private javax.swing.JComboBox<String> conSelect;
     private javax.swing.JButton csvReport;
     private javax.swing.JButton emailReport;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
