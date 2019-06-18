@@ -11,4 +11,23 @@ package FireCore;
  */
 public class ReportCreation {
     
+
+ 
+ 
+ public static void createCSVFile(){
+ 
+ 
+ 
+ }
+ 
+ 
+ public static void createPDF(){
+ 
+ 
+ 
+ }
+    
+    
+    
+    
 }
