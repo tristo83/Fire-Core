@@ -107,7 +107,7 @@ public class MainPage extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         DbSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_search-database_49618 (1).png"))); // NOI18N
-        DbSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        DbSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         DbSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DbSearchActionPerformed(evt);
@@ -126,7 +126,7 @@ public class MainPage extends javax.swing.JFrame {
         jLabel3.setToolTipText("");
 
         jButtonDeletePanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Delete_Panel.png"))); // NOI18N
-        jButtonDeletePanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButtonDeletePanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButtonDeletePanel.setMaximumSize(new java.awt.Dimension(57, 57));
         jButtonDeletePanel.setMinimumSize(new java.awt.Dimension(57, 57));
         jButtonDeletePanel.addActionListener(new java.awt.event.ActionListener() {
