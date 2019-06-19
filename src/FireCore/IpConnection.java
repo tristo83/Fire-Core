@@ -5,7 +5,7 @@
  */
 package FireCore;
 
-import static FireCore.MainPage.jTable1_DisplayData;
+
 import static FireCore.MainPage.jTree1;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -28,8 +28,7 @@ import java.util.TimerTask;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Calendar;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
