@@ -254,11 +254,12 @@
         <Component class="javax.swing.JTable" name="jTable2_DisplayDataHistory">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
+              <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="Date" type="java.lang.Object"/>
                 <Column editable="false" title="Time" type="java.lang.Object"/>
                 <Column editable="false" title="Pnt/Zone" type="java.lang.Object"/>
                 <Column editable="false" title="Pnt/Zone Number" type="java.lang.Object"/>
+                <Column editable="false" title="Condition" type="java.lang.Object"/>
                 <Column editable="false" title="Description" type="java.lang.Object"/>
               </Table>
             </Property>

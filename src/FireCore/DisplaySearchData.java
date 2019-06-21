@@ -173,11 +173,11 @@ public class DisplaySearchData extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Time", "Pnt/Zone", "Pnt/Zone Number", "Description"
+                "Date", "Time", "Pnt/Zone", "Pnt/Zone Number", "Condition", "Description"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
