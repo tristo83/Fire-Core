@@ -23,8 +23,10 @@ public class SqlHistorySearch {
 
     private static String date;
     private static String time;
+    private static String pointZone;
     private static String pointNum;
     private static String pointStatus;
+    
     private static String description;
 
     static void getAllPanelHistory(String panelNum, String pointZoneData, String condition) throws SQLException {
@@ -108,6 +110,7 @@ String zoneNum2 = "2";
 
             date = rs.getString("date");
             time = rs.getString("time");
+            pointZone = rs.getString("pntZone");
             pointNum = rs.getString("pointNum");
             pointStatus = rs.getString("pointStatus");
             description = rs.getString("description");
@@ -115,7 +118,7 @@ String zoneNum2 = "2";
             DefaultTableModel model;
             model = (DefaultTableModel) jTable2_DisplayDataHistory.getModel();
 
-            model.insertRow(model.getRowCount(), new Object[]{date, time, pointNum, pointStatus, description});
+            model.insertRow(model.getRowCount(), new Object[]{date, time, pointZone, pointNum, pointStatus, description});
 
             DisplaySearchData.jTable2_DisplayDataHistory.setModel(model);
 
