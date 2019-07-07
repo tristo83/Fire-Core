@@ -240,7 +240,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
         
         
             try {
-                SqlHistorySearch.getAllPanelHistory(panelNum, pointZoneData, condition);
+              SqlHistorySearch.getAllPanelHistory(panelNum, pointZoneData, condition);
             } catch (SQLException ex) {
                 Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -267,11 +267,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
     }//GEN-LAST:event_clearTableButtonActionPerformed
 
     private void emailReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailReportActionPerformed
-        try {
-            SendEmails.emailReport();
-        } catch (MessagingException ex) {
-            Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SendEmails.emailReport();
     }//GEN-LAST:event_emailReportActionPerformed
 
     private void csvReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvReportActionPerformed
