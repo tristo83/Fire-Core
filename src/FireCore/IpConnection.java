@@ -152,7 +152,9 @@ public class IpConnection {
         }
 
     }
-    
+
+
+// checkIpConnection still needs work to make it right    
 public static void checkIpConnection(){
 
 
