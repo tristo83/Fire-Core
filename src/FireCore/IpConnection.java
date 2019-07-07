@@ -66,6 +66,7 @@ public class IpConnection {
                 jTree1.setCellRenderer(renderer);
 
                 writeData();
+                
 
             }
 
@@ -92,7 +93,7 @@ public class IpConnection {
                 StringBuilder clientData = new StringBuilder();
                 String redDataText = null;
                 
-                
+                checkIpConnection();
                 try {
                     while ((red = smtpSocket.getInputStream().read(buffer)) > -1) {
                         redData = new byte[red];
@@ -111,7 +112,7 @@ public class IpConnection {
                         String testDateString = df.format(todaysDate);
                         String testTime = df1.format(todaysDate);
                         
-                        SqlAddPanelHistory.sqlPanelHistory(redDataText, testDateString, testTime );
+                       SqlAddPanelHistory.sqlPanelHistory(redDataText, testDateString, testTime );
 
 //                        System.out.println(redDataText);
 //             clientData.append(redDataText);
@@ -120,7 +121,6 @@ public class IpConnection {
                     Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
                     Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex);
                 }
 
             }
@@ -153,13 +153,30 @@ public class IpConnection {
 
     }
     
-public static void getSysDateTime(){
-
- 
+public static void checkIpConnection(){
 
 
+        
 
-
-}    
-
+InetAddress geek = null; 
+            try {
+                geek = InetAddress.getByName("192.168.1.10");
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    System.out.println("Sending Ping Request to " + "192.168.1.10"); 
+            try {
+                if (geek.isReachable(5000))
+                    System.out.println("Host is reachable");
+                else 
+                    System.out.println("Sorry ! We can't reach to this host");
+            } catch (IOException ex) {
+                Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+  } 
 }
+  
+
+  
+
+
