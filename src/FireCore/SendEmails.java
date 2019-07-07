@@ -5,7 +5,6 @@
  */
 package FireCore;
 
-import static FireCore.SqlSiteSetUp.host;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,6 +18,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import static FireCore.ForgotPassword.emailTextFeild;
+import static FireCore.SqlSiteSetUp.host;
+
+
 import java.util.Arrays;
 import javax.mail.MessagingException;
 
@@ -28,9 +30,9 @@ import javax.mail.MessagingException;
  */
 public class SendEmails {
 
-    public static void forgotPassword() throws SQLException {
+    static Properties props = new Properties();
 
-        Properties props = new Properties();
+    public static void forgotPassword() throws SQLException {
 
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", 587);
@@ -76,52 +78,78 @@ public class SendEmails {
 
     }
 
-    public static void emailReport() throws MessagingException {
-String[] value = new String[6];
-        
-       for (int i = 0; i < DisplaySearchData.jTable2_DisplayDataHistory.getRowCount(); i++){
-       for(int j = 0; j < DisplaySearchData.jTable2_DisplayDataHistory.getColumnCount(); j++ ){
-       
-        
-               
-               value[j] = DisplaySearchData.jTable2_DisplayDataHistory.getModel().getValueAt(i, j).toString();
-       
-      
-      if(j == 4){
-      
-      String test1 = value[0];
-      String test2 = value[1];
-      String test3 = value[2];
-      String test4 = value[3];
-      String test5 = value[4];
-      
-      String test6 = test1 + "  " + test2 + "  " + String.format("%-14s", test3) + "  " + String.format("%-26s", test4) + "    " + test5;
-      
-      
-      
-      
-      
-       System.out.println(test6);
-      }
-      
-      
-       
-       
-       
-       
-       }
-       
-       }
-       
-      
-        
-        
-     
-        
-        
-        
-       
-
-    }
+//    public static void emailReport() throws MessagingException {
+//        String[] tableInfo = new String[6];
+//        String date = tableInfo[0];
+//        String time = null;
+//        String pointZone = null;
+//        String pntZnNum = null;
+//        String condition = null;
+//        String description = null;
+//        String test6 = null;
+//        int k = 0;
+//
+//        String[] emailString = new String[DisplaySearchData.jTable2_DisplayDataHistory.getRowCount() -1];
+//
+//        System.out.println(DisplaySearchData.jTable2_DisplayDataHistory.getRowCount());
+//
+//        for (int i = 0; i < DisplaySearchData.jTable2_DisplayDataHistory.getRowCount(); i++) {
+//
+//            for (int j = 0; j < DisplaySearchData.jTable2_DisplayDataHistory.getColumnCount(); j++) {
+//
+//                tableInfo[j] = DisplaySearchData.jTable2_DisplayDataHistory.getModel().getValueAt(i, j).toString();
+//
+//                if (j == 5) {
+//
+//                    date = tableInfo[0];
+//                    time = tableInfo[1];
+//                    pointZone = tableInfo[2];
+//                    pntZnNum = tableInfo[3];
+//                    condition = tableInfo[4];
+//                    description = tableInfo[5];
+//
+//                    test6 = date + "  " + time + "  " + pointZone + "  " + String.format("%-14s", pntZnNum) + "  " + String.format("%-26s", condition) + "    " + description;
+//
+//                    int m = 0;
+//
+//                    for (;k <= i; k++) {
+//
+//                        emailString[k] = test6;
+//                        
+//                        System.out.println(emailString[k]);
+//                        
+//
+//                    }
+//                
+//                }
+//                
+//            }
+//
+//        }
+//
+//        props.put("mail.smtp.host", "smtp.gmail.com");
+//        props.put("mail.smtp.port", 587);
+//        props.put("mail.smtp.user", "carmichael.tristan@gmail.com");
+//        props.put("mail.smtp.auth", true);
+//        props.put("mail.smtp.starttls.enable", true);
+//        props.put("mail.smtp.debug", true);
+//        props.put("mail.smtp.socketFactory.port", 587);
+//        props.put("mail.smtp.Factory.class", "javax.net.ssl.SSLSocketFactory");
+//        props.put("mail.smtp.socketFactory.fallback", "false");
+//        Session session = Session.getDefaultInstance(props, null);
+//        session.setDebug(true);
+//        MimeMessage message = new MimeMessage(session);
+//        System.out.println(emailString[0]);
+//        System.out.println(emailString[1]);
+//        message.setText(emailString[0] + "\n");
+//
+//        message.setSubject("Database Search");
+//        message.addRecipient(Message.RecipientType.TO, new InternetAddress("carmichael.tristan@gmail.com"));
+//        message.saveChanges();
+//        Transport transport = session.getTransport("smtp");
+//        transport.connect("smtp.gmail.com", "carmichael.tristan@gmail.com", "79tristy83");
+//        transport.sendMessage(message, message.getAllRecipients());
+//        transport.close();
+//    }
 
 }
