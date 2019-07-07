@@ -5,7 +5,7 @@
  */
 package FireCore;
 
-import static FireCore.SqlSiteSetUp.SqlPanelSetUp;
+
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ public class SiteSetUpPage extends javax.swing.JFrame {
     public static String mainSiteName;
     public static int panNumSetUp;
 
-    private static void MainSiteSetUp() {
+    private static void MainSiteSetUp() throws ClassNotFoundException {
 
         mainSiteName = mainSiteNameFeild.getText();
         panNumSetUp = (Integer) sitePanNumFeild.getValue();
@@ -32,13 +32,8 @@ public class SiteSetUpPage extends javax.swing.JFrame {
         int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete all existing data?", "Site Panel Update", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (p == 0) {
                     
-            try {
-                SqlSiteSetUp.sqlSiteSetUp(mainSiteName, panNumSetUp);
-                JtreeBuild.JtreeBuild(mainSiteName, panNumSetUp);
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(SiteSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    SqlSiteSetUp.sqlSiteSetUp(mainSiteName, panNumSetUp);
+                    JtreeBuild.JtreeBuild(mainSiteName, panNumSetUp);
                           
                    
 
@@ -147,8 +142,12 @@ public class SiteSetUpPage extends javax.swing.JFrame {
         
         
         
-        MainSiteSetUp();
-        dispose();
+        try {
+            MainSiteSetUp();
+            dispose();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SiteSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
