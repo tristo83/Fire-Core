@@ -77,7 +77,7 @@ String zoneNum2 = "2";
 
     private static void sqlReadAlarmData(String panelNum, String loopNum, String condition) throws SQLException {
 
-         int panNum = 1;
+        int panNum = 1;
         String alarmClr = "Alarm Clr";
         String operate = "Operate";
 
