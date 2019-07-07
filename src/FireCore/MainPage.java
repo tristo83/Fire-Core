@@ -277,7 +277,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        SqlReadPanelList.jTreeSqlPanelDisply();
+         SqlReadPanelList.jTreeSqlPanelDisply();
 
     }//GEN-LAST:event_formWindowOpened
 
