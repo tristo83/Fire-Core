@@ -19,17 +19,20 @@ public class DisplaySearchData extends javax.swing.JFrame {
     
     private static String panelNum;
     private static String pointZoneData;
-  
     private static String condition;
+    
 
     /**
      * Creates new form DisplaySearchData
      */
+    
     public DisplaySearchData() {
         initComponents();
         
         jTable2_DisplayDataHistory.setAutoCreateRowSorter(true);
     }
+    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,7 +217,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
 
     private void DbSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DbSearchActionPerformed
         
-        panelNum = panelSelect.getSelectedItem().toString();
+       panelNum = panelSelect.getSelectedItem().toString();
         pointZoneData = pointZoneSelect.getSelectedItem().toString();
         condition = conSelect.getSelectedItem().toString();
         
@@ -253,8 +256,6 @@ public class DisplaySearchData extends javax.swing.JFrame {
         
         
         }
-            
-        
 
     }//GEN-LAST:event_DbSearchActionPerformed
 
@@ -267,7 +268,13 @@ public class DisplaySearchData extends javax.swing.JFrame {
     }//GEN-LAST:event_clearTableButtonActionPerformed
 
     private void emailReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailReportActionPerformed
-        SendEmails.emailReport();
+        
+        try {
+            SendEmails.emailReport();
+        } catch (MessagingException ex) {
+            Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_emailReportActionPerformed
 
     private void csvReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvReportActionPerformed
