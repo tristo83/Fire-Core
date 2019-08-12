@@ -122,6 +122,7 @@ String zoneNum2 = "2";
 
             DisplaySearchData.jTable2_DisplayDataHistory.setModel(model);
 
+
         }
         con.close();
         st.close();
