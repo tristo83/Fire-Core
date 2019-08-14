@@ -31,15 +31,17 @@ import javax.swing.table.DefaultTableModel;
  * @author TANDE
  */
 public class SqlFunctions {
-
-
-    public static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;user=FirePanel;password=elisha83";
-
+    
+private static String sql;
+static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;user=FirePanel;password=elisha83";
+private static Connection con;
+    
+    
     public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException {
 
 //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try {
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
             String query1 = "Select count(panelID) from db_accessadmin.Fire_Panel_Data";
@@ -59,7 +61,7 @@ public class SqlFunctions {
                
 
                     Statement st2 = con.createStatement();
-                    String sql = "DELETE FROM db_accessadmin.Fire_Panel_Data";
+                    sql = "DELETE FROM db_accessadmin.Fire_Panel_Data";
                     st2.executeUpdate(sql);
                     SqlPanelSetUp(mainSiteName, panNumSetUp);
                     
@@ -84,8 +86,8 @@ public class SqlFunctions {
     public static void SqlPanelSetUp(String mainSiteName, int panNumSetUp) {
 
         try {
-            Connection con = DriverManager.getConnection(host);
-            String sql = "INSERT INTO db_accessadmin.Fire_Panel_Data" + "(panelID,mainSiteName, sidNum)" + "values (?,?,?)";
+            con = DriverManager.getConnection(host);
+            sql = "INSERT INTO db_accessadmin.Fire_Panel_Data" + "(panelID,mainSiteName, sidNum)" + "values (?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
             for (int x = 1; x <= panNumSetUp; x++) {
@@ -124,7 +126,7 @@ public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, Strin
         DefaultMutableTreeNode selectNode;
 
         try {
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
             String query = "SELECT * FROM db_accessadmin.Fire_Panel_Data";
@@ -206,7 +208,7 @@ public static void SqlUpdateDeletePanel(int jTreeIndexNum) {
         int test3 = jTreeIndexNum;
       
         try {
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
             String query1 = "Select count(panelID) from db_accessadmin.Fire_Panel_Data";
@@ -266,7 +268,7 @@ public static void jTreeSqlPanelDisply() {
             DefaultMutableTreeNode siteName = null;
             
             
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
             String query2 = "SELECT * FROM db_accessadmin.Fire_Panel_Data";
@@ -350,11 +352,11 @@ public static void jTreeSqlPanelDisply() {
 public static void removePanel(int jTreeIndexNum) {
 
         try {
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
             jTreeIndexNum = jTreeIndexNum - 1;
-            String sql = " DELETE FROM db_accessadmin.Fire_Panel_Data where panelID = ?";
+            sql = " DELETE FROM db_accessadmin.Fire_Panel_Data where panelID = ?";
             PreparedStatement st1 = con.prepareStatement(sql);
 
             st1.setInt(1, jTreeIndexNum);
@@ -411,7 +413,7 @@ public static void ShowPanInfo() {
             int portNum;
             String ipAddress;
 
-            Connection con = DriverManager.getConnection(host);
+            con = DriverManager.getConnection(host);
             System.out.println("Connected");
             String query = "SELECT * FROM db_accessadmin.Fire_Panel_Data";
             Statement st = con.createStatement();
@@ -473,7 +475,7 @@ public static void ShowPanInfo() {
     private static String description;
 
     static void getAllPanelHistory(String panelNum, String pointZoneData, String condition) throws SQLException {
-        Connection con = DriverManager.getConnection(host);
+        con = DriverManager.getConnection(host);
         System.out.println("Connected");
         String query = "SELECT * FROM" + "db_accessadmin.";
         Statement st = con.createStatement();
@@ -524,7 +526,7 @@ String zoneNum2 = "2";
         String alarmClr = "Alarm Clr";
         String operate = "Operate";
 
-        Connection con = DriverManager.getConnection(host);
+        con = DriverManager.getConnection(host);
 
         System.out.println("Connected");
         String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Points WHERE panelID=" + panNum + " AND pointStatus LIKE '%" + condition + "%'OR pointStatus LIKE'%" + alarmClr + "%'OR pointStatus LIKE'%" + operate + "%'" ;
@@ -545,7 +547,7 @@ String zoneNum2 = "2";
 
     private static void sqlReadDataHistory(String query) throws SQLException {
 
-        Connection con = DriverManager.getConnection(host);
+        con = DriverManager.getConnection(host);
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
 
@@ -579,7 +581,6 @@ String zoneNum2 = "2";
     private static int nodeNum;
     private static int loopNum;
     private static int zoneNum;
-    private static String sql;
     private static String endOfData = "***  MX1 V1.62 \"PN1290 MX1 AU V4.1\" Event Log  ***";
 
     public static void sqlPanelHistory(String redDataText, String testDateString, String testTime) throws SQLException, IOException {
@@ -779,7 +780,7 @@ String zoneNum2 = "2";
     public static void sqlWritePointData(String sql) throws SQLException {
         int pna = 1;
 
-        Connection con = DriverManager.getConnection(host);
+        con = DriverManager.getConnection(host);
         System.out.println("Connected");
 
 //            
@@ -805,7 +806,7 @@ String zoneNum2 = "2";
     
     int pna = 1;
 
-        Connection con = DriverManager.getConnection(host);
+        con = DriverManager.getConnection(host);
         System.out.println("Connected");
 
 //            
