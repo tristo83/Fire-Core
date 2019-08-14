@@ -60,7 +60,7 @@ public class SqlDeletePanel {
                 jTree1.expandRow(i);
             }
 
-            SqlReadPanelList.jTreeSqlPanelDisply();
+            SqlFunctions.jTreeSqlPanelDisply();
 
         } catch (SQLException ex) {
             System.out.println(ex);
