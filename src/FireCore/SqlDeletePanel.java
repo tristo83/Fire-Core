@@ -21,52 +21,52 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class SqlDeletePanel {
 
-    public static void removePanel(int jTreeIndexNum) {
-
-        try {
-            Connection con = DriverManager.getConnection(host);
-            System.out.println("Connected");
-
-            jTreeIndexNum = jTreeIndexNum - 1;
-            String sql = " DELETE FROM db_accessadmin.Fire_Panel_Data where panelID = ?";
-            PreparedStatement st1 = con.prepareStatement(sql);
-
-            st1.setInt(1, jTreeIndexNum);
-
-            st1.executeUpdate();
-
-            st1.close();
-
-            con.close();
-
-            DefaultMutableTreeNode deleteNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
-
-            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
-
-            model.removeNodeFromParent(deleteNode);
-
-            model.reload();
-             
-
-            
-  
-            SqlUpdateDeletePanel.SqlUpdateDeletePanel(jTreeIndexNum);
-            
-            
-            
-          
-
-            for (int i = 0; i < jTree1.getRowCount(); i++) {
-                jTree1.expandRow(i);
-            }
-
-            SqlFunctions.jTreeSqlPanelDisply();
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        System.out.println("Connection Closed");
-
-    }
+//    public static void removePanel(int jTreeIndexNum) {
+//
+//        try {
+//            Connection con = DriverManager.getConnection(host);
+//            System.out.println("Connected");
+//
+//            jTreeIndexNum = jTreeIndexNum - 1;
+//            String sql = " DELETE FROM db_accessadmin.Fire_Panel_Data where panelID = ?";
+//            PreparedStatement st1 = con.prepareStatement(sql);
+//
+//            st1.setInt(1, jTreeIndexNum);
+//
+//            st1.executeUpdate();
+//
+//            st1.close();
+//
+//            con.close();
+//
+//            DefaultMutableTreeNode deleteNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
+//
+//            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+//
+//            model.removeNodeFromParent(deleteNode);
+//
+//            model.reload();
+//             
+//
+//            
+//  
+//            SqlUpdateDeletePanel.SqlUpdateDeletePanel(jTreeIndexNum);
+//            
+//            
+//            
+//          
+//
+//            for (int i = 0; i < jTree1.getRowCount(); i++) {
+//                jTree1.expandRow(i);
+//            }
+//
+//            SqlFunctions.jTreeSqlPanelDisply();
+//
+//        } catch (SQLException ex) {
+//            System.out.println(ex);
+//        }
+//        System.out.println("Connection Closed");
+//
+//    }
 
 }
