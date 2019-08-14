@@ -224,7 +224,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
         if (!panelNum.equals("Select") && pointZoneData.equals("Point") && !condition.equals("Select")) {
             
             try {
-                SqlHistorySearch.getLoopHistory(panelNum,pointZoneData, condition);
+                SqlFunctions.getLoopHistory(panelNum,pointZoneData, condition);
             } catch (SQLException ex) {
                 Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -233,7 +233,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
         
         
             try {
-                SqlHistorySearch.getZoneHistory(panelNum, pointZoneData, condition);
+                SqlFunctions.getZoneHistory(panelNum, pointZoneData, condition);
             } catch (SQLException ex) {
                 Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -243,7 +243,7 @@ public class DisplaySearchData extends javax.swing.JFrame {
         
         
             try {
-              SqlHistorySearch.getAllPanelHistory(panelNum, pointZoneData, condition);
+              SqlFunctions.getAllPanelHistory(panelNum, pointZoneData, condition);
             } catch (SQLException ex) {
                 Logger.getLogger(DisplaySearchData.class.getName()).log(Level.SEVERE, null, ex);
             }
