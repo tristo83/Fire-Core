@@ -18,7 +18,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import static FireCore.ForgotPassword.emailTextFeild;
-import static FireCore.SqlSiteSetUp.host;
+import static FireCore.SqlFunctions.host;
 import java.util.ArrayList;
 
 
