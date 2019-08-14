@@ -7,7 +7,7 @@ package FireCore;
 
 import static FireCore.DisplaySearchData.jTable2_DisplayDataHistory;
 import static FireCore.MainPage.jTable1_DisplayData;
-import static FireCore.SqlSiteSetUp.host;
+import static FireCore.SqlFunctions.host;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
