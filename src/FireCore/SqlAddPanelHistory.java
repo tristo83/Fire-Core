@@ -7,7 +7,7 @@ package FireCore;
 
 
 import static FireCore.MainPage.jTable1_DisplayData;
-import static FireCore.SqlSiteSetUp.host;
+import static FireCore.SqlFunctions.host;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
