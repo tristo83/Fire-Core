@@ -112,7 +112,7 @@ public class IpConnection {
                         String testDateString = df.format(todaysDate);
                         String testTime = df1.format(todaysDate);
                         
-                       SqlAddPanelHistory.sqlPanelHistory(redDataText, testDateString, testTime );
+                       SqlFunctions.sqlPanelHistory(redDataText, testDateString, testTime );
 
 //                        System.out.println(redDataText);
 //             clientData.append(redDataText);
