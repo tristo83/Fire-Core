@@ -32,7 +32,7 @@ public class SiteSetUpPage extends javax.swing.JFrame {
         int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete all existing data?", "Site Panel Update", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (p == 0) {
                     
-                    SqlSiteSetUp.sqlSiteSetUp(mainSiteName, panNumSetUp);
+                    SqlFunctions.sqlSiteSetUp(mainSiteName, panNumSetUp);
                     JtreeBuild.JtreeBuild(mainSiteName, panNumSetUp);
                           
                    
