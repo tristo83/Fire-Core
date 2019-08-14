@@ -7,7 +7,7 @@ package FireCore;
 
 import static FireCore.IpConnection.smtpSocket;
 import static FireCore.IpConnection.writeData;
-import static FireCore.SqlSiteSetUp.host;
+import static FireCore.SqlFunctions.host;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -54,7 +54,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
        portNumInput = Integer.parseInt(PorttNumInput.getText());
        manufacturer = fipBrandSelection.getSelectedItem().toString();
 
-            SqlUpdateSiteInfo.SqlUpdateSiteInfo(bldNameInput,sidNumInput,ipAddress,portNumInput, manufacturer);
+            SqlFunctions.SqlUpdateSiteInfo(bldNameInput,sidNumInput,ipAddress,portNumInput, manufacturer);
 
        
 
