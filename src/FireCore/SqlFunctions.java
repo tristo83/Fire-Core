@@ -41,7 +41,15 @@ import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-
+import static FireCore.MainPage.jTree1;
+import static FireCore.SqlFunctions.host;
+import static java.lang.Integer.parseInt;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 
 /**
@@ -362,6 +370,54 @@ public static void jTreeSqlPanelDisply() {
             
             jTree1.setCellRenderer(renderer);
 
+
+    }
+
+public static void removePanel(int jTreeIndexNum) {
+
+        try {
+            Connection con = DriverManager.getConnection(host);
+            System.out.println("Connected");
+
+            jTreeIndexNum = jTreeIndexNum - 1;
+            String sql = " DELETE FROM db_accessadmin.Fire_Panel_Data where panelID = ?";
+            PreparedStatement st1 = con.prepareStatement(sql);
+
+            st1.setInt(1, jTreeIndexNum);
+
+            st1.executeUpdate();
+
+            st1.close();
+
+            con.close();
+
+            DefaultMutableTreeNode deleteNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
+
+            DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
+
+            model.removeNodeFromParent(deleteNode);
+
+            model.reload();
+             
+
+            
+  
+            SqlUpdateDeletePanel(jTreeIndexNum);
+            
+            
+            
+          
+
+            for (int i = 0; i < jTree1.getRowCount(); i++) {
+                jTree1.expandRow(i);
+            }
+
+            jTreeSqlPanelDisply();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.out.println("Connection Closed");
 
     }
 
