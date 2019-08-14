@@ -323,7 +323,7 @@ public class MainPage extends javax.swing.JFrame {
 
         int jTreeIndexNum = model.getSelectionRows()[0];
 
-        SqlDeletePanel.removePanel(jTreeIndexNum);
+        SqlFunctions.removePanel(jTreeIndexNum);
 
     }//GEN-LAST:event_jMenuItemRemoveActionPerformed
 
@@ -407,7 +407,7 @@ public class MainPage extends javax.swing.JFrame {
 
         int jTreeIndexNum = model.getSelectionRows()[0];
 
-        SqlDeletePanel.removePanel(jTreeIndexNum);
+        SqlFunctions.removePanel(jTreeIndexNum);
     }//GEN-LAST:event_jButtonDeletePanelActionPerformed
 
     /**
