@@ -6,7 +6,7 @@
 package FireCore;
 
 import static FireCore.MainPage.jTree1;
-import static FireCore.SqlSiteSetUp.host;
+import static FireCore.SqlFunctions.host;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
