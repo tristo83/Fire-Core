@@ -629,7 +629,7 @@ String zoneNum2 = "2";
 //                    System.out.println(pointStatus);
 //                    System.out.println(description);
 
-                    sql = "INSERT INTO db_accessadmin.MX1_FirePanel_Points" + "(panelID, date , time,pointNum, pntZone, pointStatus, description)" + "values (?,?,?,?,?,?)";
+                    sql = "INSERT INTO db_accessadmin.MX1_FirePanel_Points" + "(panelID, date , time, pntZone, pointNum, pointStatus, description)" + "values (?,?,?,?,?,?,?)";
 
                     sqlWritePointData(sql);
 
@@ -661,7 +661,7 @@ String zoneNum2 = "2";
 //                    sqlZoneEvtCheck();
                     updateTable();
 //                    MainPage.displayPanelInfo.append(String.format("%-12s%-13s%-13s%-33s%-33s%-25s%n",date,time,pntZn,pointNum,pointStatus,description));
-                    sql = "INSERT INTO db_accessadmin.MX1_FirePanel_Zone" + "(panelID,  date , time, pntZone, pointNum,pointStatus, description)" + "values (?,?,?,?,?,?)";
+                    sql = "INSERT INTO db_accessadmin.MX1_FirePanel_Zone" + "(panelID,  date , time, pntZone, pointNum,pointStatus, description)" + "values (?,?,?,?,?,?,?)";
 
                     sqlWriteZoneData(sql);
 
