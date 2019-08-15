@@ -93,7 +93,7 @@ public class IpConnection {
                 StringBuilder clientData = new StringBuilder();
                 String redDataText = null;
                 
-                checkIpConnection();
+               
                 try {
                     while ((red = smtpSocket.getInputStream().read(buffer)) > -1) {
                         redData = new byte[red];
@@ -120,7 +120,7 @@ public class IpConnection {
                 } catch (IOException ex) {
                     Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(ex);
                 }
 
             }
