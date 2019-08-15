@@ -815,9 +815,11 @@ String zoneNum2 = "2";
         st1.setInt(1, pna);
         st1.setString(2, date.trim());
         st1.setString(3, time.trim());
-        st1.setString(4, pointNum.trim());
-        st1.setString(5, pointStatus.trim());
-        st1.setString(6, description.trim());
+        st1.setString(4, pntZn.trim());
+        st1.setString(5, pointNum.trim());
+        st1.setString(6, pointStatus.trim());
+        st1.setString(7, description.trim());
+
 
         st1.executeUpdate();
 
