@@ -37,7 +37,7 @@ static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;use
 private static Connection con;
     
     
-    public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException {
+    public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException, IOException {
 
 //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try {
@@ -70,6 +70,8 @@ private static Connection con;
             } else if (panelId1 == 0) {
 
                 SqlPanelSetUp(mainSiteName, panNumSetUp);
+                
+ 
 
             }
         } catch (SQLException ex) {
@@ -83,12 +85,15 @@ private static Connection con;
      * @param mainSiteName
      * @param panNumSetUp
      */
-    public static void SqlPanelSetUp(String mainSiteName, int panNumSetUp) {
+    public static void SqlPanelSetUp(String mainSiteName, int panNumSetUp){
 
         try {
             con = DriverManager.getConnection(host);
             sql = "INSERT INTO db_accessadmin.Fire_Panel_Data" + "(panelID,mainSiteName, sidNum)" + "values (?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
+
+            
+
 
             for (int x = 1; x <= panNumSetUp; x++) {
 
@@ -99,8 +104,6 @@ private static Connection con;
                 
 
                 st.executeUpdate();
-                
-                
 
             }
 
@@ -121,7 +124,7 @@ private static Connection con;
 public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, String ipAddress, int portNumInput, String manufacturer ) {
 
         int panNumSetUp = parseInt(PanelSetUpPage.panelNumDisplay.getText());
-//        String mainSiteName = PanelSetUpPage.mainSiteNameInput.getText();
+        String mainSiteName = PanelSetUpPage.mainSiteNameInput.getText();
         int id;
         DefaultMutableTreeNode selectNode;
 
