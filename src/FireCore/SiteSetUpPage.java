@@ -6,7 +6,7 @@
 package FireCore;
 
 
-import java.sql.Statement;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,7 +32,11 @@ public class SiteSetUpPage extends javax.swing.JFrame {
         int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete all existing data?", "Site Panel Update", JOptionPane.YES_NO_CANCEL_OPTION);
                 if (p == 0) {
                     
-                    SqlFunctions.sqlSiteSetUp(mainSiteName, panNumSetUp);
+            try {
+                SqlFunctions.sqlSiteSetUp(mainSiteName, panNumSetUp);
+            } catch (IOException ex) {
+                Logger.getLogger(SiteSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     JtreeBuild.JtreeBuild(mainSiteName, panNumSetUp);
                           
                    
