@@ -22,11 +22,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.Timer;
 
-import javax.swing.tree.DefaultTreeCellRenderer;
 
 
 /**
@@ -139,8 +135,6 @@ public class PanelSetUpPage extends javax.swing.JFrame {
 
         sidNumLab.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sidNumLab.setText("SID Number:");
-
-        mainSiteNameInput.setText("jLabel3");
 
         fipBrandSelection.setToolTipText("");
 
