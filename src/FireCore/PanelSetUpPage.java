@@ -22,9 +22,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
-
 /**
  *
  * @author TANDE
@@ -33,8 +30,8 @@ public class PanelSetUpPage extends javax.swing.JFrame {
 
     private static String bldNameInput = null;
     private static int sidNumInput;
-    private static int sidNumInputString;
     private static int portNumInput;
+    private static int panelID;
     private static String ipAddress;
     private static String manufacturer;
     private static final String ipAddressPattern = "^([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])$";
@@ -45,14 +42,12 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     private static void GetPanelInfo() {
 
         bldNameInput = bldNamFeild.getText();
-        sidNumInput =  Integer.parseInt(selectSidNum.getText());
-       ipAddress = ipAddressInput.getText();
-       portNumInput = Integer.parseInt(PorttNumInput.getText());
-       manufacturer = fipBrandSelection.getSelectedItem().toString();
+        sidNumInput = Integer.parseInt(selectSidNum.getText());
+        ipAddress = ipAddressInput.getText();
+        portNumInput = Integer.parseInt(PorttNumInput.getText());
+        manufacturer = fipBrandSelection.getSelectedItem().toString();
 
-            SqlFunctions.SqlUpdateSiteInfo(bldNameInput,sidNumInput,ipAddress,portNumInput, manufacturer);
-
-       
+        SqlFunctions.SqlUpdateSiteInfo(bldNameInput, sidNumInput, ipAddress, portNumInput, manufacturer);
 
     }
 
@@ -65,10 +60,9 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         System.out.println(matcher.matches());
 
         portNumInput = Integer.parseInt(PorttNumInput.getText());
+        panelID = Integer.parseInt(panelNumDisplay.getText());
 
-        IpConnection.IpConnect(portNumInput, ipAddress);
-        
-     
+        SqlFunctions.CheckIpAndPanId(ipAddress, panelID, portNumInput);
 
     }
 
@@ -311,7 +305,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPanelConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPanelConnectActionPerformed
-      
+
         try {
             try {
                 PanelConnect();
@@ -321,10 +315,9 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-      
+
         dispose();
-        
+
         try {
             IpConnection.writeData();
         } catch (IOException ex) {
@@ -333,20 +326,17 @@ public class PanelSetUpPage extends javax.swing.JFrame {
             Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-       
-        
- 
+
     }//GEN-LAST:event_jButtonPanelConnectActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    
-            dispose();
+
+        dispose();
 
     }//GEN-LAST:event_formWindowClosing
 
     private void panelDisconectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panelDisconectActionPerformed
-      
+
         try {
             IpConnection.closeConnections();
         } catch (IOException ex) {
@@ -356,8 +346,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_panelDisconectActionPerformed
 
     private void savePanelInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePanelInfoActionPerformed
-         
-       
+
         GetPanelInfo();
     }//GEN-LAST:event_savePanelInfoActionPerformed
 
@@ -366,38 +355,35 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_exitPanelSetUpPageActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      
+
         Connection con = null;
         try {
             con = DriverManager.getConnection(host);
         } catch (SQLException ex) {
             Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-            System.out.println("Connected");
-            String query = "SELECT * FROM db_accessadmin.Fire_Panel_Brands";
-            Statement st = null;
+        System.out.println("Connected");
+        String query = "SELECT * FROM db_accessadmin.Fire_Panel_Brands";
+        Statement st = null;
         try {
             st = con.createStatement();
         } catch (SQLException ex) {
             Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {   
+        try {
             ResultSet rs = st.executeQuery(query);
-             while (rs.next()) {
-        
-        String panelBrand = rs.getString("ManufacturerName");
-        
+            while (rs.next()) {
+
+                String panelBrand = rs.getString("ManufacturerName");
+
                 fipBrandSelection.addItem(panelBrand);
-        
-        }
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-        
-        
-        
+
+
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -431,11 +417,9 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PanelSetUpPage().setVisible(true);
-                 
+
             }
 
-   
-            
         });
     }
 
