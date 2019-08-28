@@ -5,7 +5,6 @@
  */
 package FireCore;
 
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.tree.DefaultTreeCellRenderer;
@@ -31,20 +30,17 @@ import javax.swing.table.DefaultTableModel;
  * @author TANDE
  */
 public class SqlFunctions {
-    
-private static String sql;
-static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;user=FirePanel;password=elisha83";
-private static Connection con;
-private static int panelID1;
-private static String ipAddress1;
-    
-    
+
+    private static String sql;
+    static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;user=FirePanel;password=elisha83";
+    private static Connection con;
+    private static int panelID1;
+    private static String ipAddress1;
+
     public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException, IOException {
 
-//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         try {
             con = DriverManager.getConnection(host);
-            System.out.println("Connected");
 
             String query1 = "Select count(panelID) from db_accessadmin.Fire_Panel_Data";
             Statement st1 = con.createStatement();
@@ -60,20 +56,14 @@ private static String ipAddress1;
 
             if (panelId1 > 0) {
 
-               
+                Statement st2 = con.createStatement();
+                sql = "DELETE FROM db_accessadmin.Fire_Panel_Data";
+                st2.executeUpdate(sql);
+                SqlPanelSetUp(mainSiteName, panNumSetUp);
 
-                    Statement st2 = con.createStatement();
-                    sql = "DELETE FROM db_accessadmin.Fire_Panel_Data";
-                    st2.executeUpdate(sql);
-                    SqlPanelSetUp(mainSiteName, panNumSetUp);
-                    
-
-              
             } else if (panelId1 == 0) {
 
                 SqlPanelSetUp(mainSiteName, panNumSetUp);
-                
- 
 
             }
         } catch (SQLException ex) {
@@ -87,15 +77,12 @@ private static String ipAddress1;
      * @param mainSiteName
      * @param panNumSetUp
      */
-    public static void SqlPanelSetUp(String mainSiteName, int panNumSetUp){
+    public static void SqlPanelSetUp(String mainSiteName, int panNumSetUp) {
 
         try {
             con = DriverManager.getConnection(host);
             sql = "INSERT INTO db_accessadmin.Fire_Panel_Data" + "(panelID,mainSiteName, sidNum)" + "values (?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
-
-            
-
 
             for (int x = 1; x <= panNumSetUp; x++) {
 
@@ -103,7 +90,6 @@ private static String ipAddress1;
                 st.setString(2, mainSiteName);
 
                 st.setInt(3, 0);
-                
 
                 st.executeUpdate();
 
@@ -122,8 +108,7 @@ private static String ipAddress1;
 
     }
 
-
-public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, String ipAddress, int portNumInput, String manufacturer ) {
+    public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, String ipAddress, int portNumInput, String manufacturer) {
 
         int panNumSetUp = parseInt(PanelSetUpPage.panelNumDisplay.getText());
         String mainSiteName = PanelSetUpPage.mainSiteNameInput.getText();
@@ -152,15 +137,12 @@ public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, Strin
                     st1.setString(4, ipAddress);
                     st1.setString(5, manufacturer);
                     st1.setInt(6, id);
-                    
+
                     st1.executeUpdate();
 
                     st1.close();
                     st.close();
                     con.close();
-                    
-                    
-                    
 
                     if (bldNameInput.equals("")) {
 
@@ -171,11 +153,6 @@ public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, Strin
                         DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
 
                         model.reload();
-                        
-                   
-                        
-        
-                        
 
                     } else {
                         selectNode = (DefaultMutableTreeNode) jTree1.getSelectionPath().getLastPathComponent();
@@ -184,11 +161,7 @@ public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, Strin
                         DefaultTreeModel model = (DefaultTreeModel) jTree1.getModel();
 
                         model.reload();
-                        
-                        
-                        
-              
- 
+
                     }
 
                     break;
@@ -206,12 +179,11 @@ public static void SqlUpdateSiteInfo(String bldNameInput, int sidNumInput, Strin
 
     }
 
-
-public static void SqlUpdateDeletePanel(int jTreeIndexNum) {
+    public static void SqlUpdateDeletePanel(int jTreeIndexNum) {
         int panelId1 = 0;
         int test2 = jTreeIndexNum;
         int test3 = jTreeIndexNum;
-      
+
         try {
             con = DriverManager.getConnection(host);
             System.out.println("Connected");
@@ -228,31 +200,25 @@ public static void SqlUpdateDeletePanel(int jTreeIndexNum) {
 
             String sql = "update db_accessadmin.Fire_Panel_Data set panelID = ? where panelID = ?";
             PreparedStatement st1 = con.prepareStatement(sql);
-            
-            
+
             while (test3 <= panelId1) {
 
-                test2 ++; 
+                test2++;
 
                 st1.setInt(1, jTreeIndexNum);
 
                 st1.setInt(2, test2);
                 st1.executeUpdate();
-                
-                jTreeIndexNum ++;
-                test3 ++;
+
+                jTreeIndexNum++;
+                test3++;
 
             }
-            
+
             st1.close();
             con.close();
-            
-         
-            
+
             jTreeSqlPanelDisply();
-            
-            
-            
 
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -261,7 +227,7 @@ public static void SqlUpdateDeletePanel(int jTreeIndexNum) {
 
     }
 
-public static void jTreeSqlPanelDisply() {
+    public static void jTreeSqlPanelDisply() {
 
         try {
             int panelId1 = 0;
@@ -271,8 +237,7 @@ public static void jTreeSqlPanelDisply() {
             String bldName = null;
             DefaultMutableTreeNode siteNetwork;
             DefaultMutableTreeNode siteName = null;
-            
-            
+
             con = DriverManager.getConnection(host);
             System.out.println("Connected");
 
@@ -281,16 +246,14 @@ public static void jTreeSqlPanelDisply() {
             ResultSet rs2 = st2.executeQuery(query2);
 
             siteNetwork = new DefaultMutableTreeNode("Site Network");
-            
-            
+
             if (rs2.next()) {
 
-            mainSiteName = rs2.getString("mainSiteName");
-            siteName = new DefaultMutableTreeNode(mainSiteName);
-            siteNetwork.add(siteName);
-            
+                mainSiteName = rs2.getString("mainSiteName");
+                siteName = new DefaultMutableTreeNode(mainSiteName);
+                siteNetwork.add(siteName);
+
             }
-            
 
             while (rs2.previous()) {
 
@@ -308,9 +271,6 @@ public static void jTreeSqlPanelDisply() {
                     siteName.add(panName);
                     DefaultTreeModel dtm = new DefaultTreeModel(siteNetwork);
                     MainPage.jTree1.setModel(dtm);
-                    
-               
-                   
 
                 } else if (bldName != null) {
 
@@ -318,9 +278,6 @@ public static void jTreeSqlPanelDisply() {
                     siteName.add(panName);
                     DefaultTreeModel dtm = new DefaultTreeModel(siteNetwork);
                     MainPage.jTree1.setModel(dtm);
-                    
-               
-                  
 
                 }
 
@@ -339,22 +296,18 @@ public static void jTreeSqlPanelDisply() {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
-        
-        
+
         Icon firePanel = new ImageIcon("src/icons/notConnected.png");
-       
 
-            DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
 
-            renderer.setLeafIcon(firePanel);
-            
-            jTree1.setCellRenderer(renderer);
+        renderer.setLeafIcon(firePanel);
 
+        jTree1.setCellRenderer(renderer);
 
     }
 
-public static void removePanel(int jTreeIndexNum) {
+    public static void removePanel(int jTreeIndexNum) {
 
         try {
             con = DriverManager.getConnection(host);
@@ -379,15 +332,8 @@ public static void removePanel(int jTreeIndexNum) {
             model.removeNodeFromParent(deleteNode);
 
             model.reload();
-             
 
-            
-  
             SqlUpdateDeletePanel(jTreeIndexNum);
-            
-            
-            
-          
 
             for (int i = 0; i < jTree1.getRowCount(); i++) {
                 jTree1.expandRow(i);
@@ -401,7 +347,8 @@ public static void removePanel(int jTreeIndexNum) {
         System.out.println("Connection Closed");
 
     }
-public static void ShowPanInfo() {
+
+    public static void ShowPanInfo() {
 
         TreeSelectionModel model = jTree1.getSelectionModel();
 
@@ -427,32 +374,26 @@ public static void ShowPanInfo() {
             while (rs.next()) {
                 id = rs.getInt("panelID");
 
-                
-                
-
                 if (id == test) {
 
                     System.out.println(id);
                     sitename = rs.getString("mainSiteName");
                     System.out.println(sitename);
                     bldName = rs.getString("bldName");
-                    
+
                     sidNumber = rs.getInt("sidNum");
                     portNum = rs.getInt("portNum");
                     ipAddress = rs.getString("ipAddress");
-                   
+
                     PanelSetUpPage.mainSiteNameInput.setText(sitename);
                     PanelSetUpPage.panelNumDisplay.setText(Integer.toString(id));
                     PanelSetUpPage.bldNamFeild.setText(bldName);
                     PanelSetUpPage.selectSidNum.setText(Integer.toString(sidNumber));
                     PanelSetUpPage.PorttNumInput.setText(Integer.toString(portNum));
                     PanelSetUpPage.ipAddressInput.setText(ipAddress);
-                    
 
                     st.close();
                     con.close();
-
-                    
 
                     break;
 
@@ -466,8 +407,6 @@ public static void ShowPanInfo() {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
-        
 
     }
 
@@ -476,7 +415,7 @@ public static void ShowPanInfo() {
     private static String pointZone;
     private static String pointNum;
     private static String pointStatus;
-    
+
     private static String description;
 
     static void getAllPanelHistory(String panelNum, String pointZoneData, String condition) throws SQLException {
@@ -487,7 +426,7 @@ public static void ShowPanInfo() {
         ResultSet rs = st.executeQuery(query);
     }
 
-    static void getLoopHistory(String panelNum, String  pointZoneData, String condition) throws SQLException {
+    static void getLoopHistory(String panelNum, String pointZoneData, String condition) throws SQLException {
 
         if (condition.equals("Fault")) {
 
@@ -506,10 +445,10 @@ public static void ShowPanInfo() {
     }
 
     static void getZoneHistory(String panelNum, String zoneNum, String condition) throws SQLException {
-int panNum = 1;
-String zoneNum2 = "2";
+        int panNum = 1;
+        String zoneNum2 = "2";
 
-        String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Zone WHERE panelID=" + panNum + "AND pointNum LIKE'%" + zoneNum2 + "%'"  + "AND pointStatus LIKE'%" + condition + "%'";
+        String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Zone WHERE panelID=" + panNum + "AND pointNum LIKE'%" + zoneNum2 + "%'" + "AND pointStatus LIKE'%" + condition + "%'";
 
         sqlReadDataHistory(query);
 
@@ -517,7 +456,7 @@ String zoneNum2 = "2";
 
     private static void sqlReadFaultData(String panelNum, String loopNum, String condition) throws SQLException {
 
-      int panNum = 1;
+        int panNum = 1;
         String deviceFail = "Device Fail";
 
         String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Points WHERE panelID=" + panNum + "AND pointStatus LIKE'%" + condition + "%' OR pointStatus LIKE'%" + deviceFail + "%'";
@@ -534,7 +473,7 @@ String zoneNum2 = "2";
         con = DriverManager.getConnection(host);
 
         System.out.println("Connected");
-        String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Points WHERE panelID=" + panNum + " AND pointStatus LIKE '%" + condition + "%'OR pointStatus LIKE'%" + alarmClr + "%'OR pointStatus LIKE'%" + operate + "%'" ;
+        String query = "SELECT * FROM db_accessadmin.MX1_FirePanel_Points WHERE panelID=" + panNum + " AND pointStatus LIKE '%" + condition + "%'OR pointStatus LIKE'%" + alarmClr + "%'OR pointStatus LIKE'%" + operate + "%'";
         sqlReadDataHistory(query);
 
     }
@@ -572,7 +511,6 @@ String zoneNum2 = "2";
 
             DisplaySearchData.jTable2_DisplayDataHistory.setModel(model);
 
-
         }
         con.close();
         st.close();
@@ -580,7 +518,6 @@ String zoneNum2 = "2";
 
     }
 
-    
     private static String pntZn;
     private static int stringLength;
     private static int nodeNum;
@@ -623,7 +560,6 @@ String zoneNum2 = "2";
                     pointNum = words[i].substring(25, 35).trim();
                     pointStatus = words[i].substring(39, 58).trim();
                     description = words[i].substring(59, stringLength);
-                    
 
 //                    sqlPntEvtCheck();
                     updateTable();
@@ -660,8 +596,6 @@ String zoneNum2 = "2";
                     pointNum = words[i].substring(25, 35).trim();;
                     pointStatus = words[i].substring(39, 57).trim();
                     description = words[i].substring(59, stringLength);
-                   
-                    
 
 //                    sqlZoneEvtCheck();
                     updateTable();
@@ -676,7 +610,6 @@ String zoneNum2 = "2";
 //                    System.out.println(pointNum);
 //                    System.out.println(pointStatus);
 //                    System.out.println(description);
-
                 }
 
             }
@@ -806,10 +739,10 @@ String zoneNum2 = "2";
         con.close();
 
     }
-    
-    public static void sqlWriteZoneData(String sql) throws SQLException{
-    
-    int pna = 1;
+
+    public static void sqlWriteZoneData(String sql) throws SQLException {
+
+        int pna = 1;
 
         con = DriverManager.getConnection(host);
         System.out.println("Connected");
@@ -825,16 +758,12 @@ String zoneNum2 = "2";
         st1.setString(6, pointStatus.trim());
         st1.setString(7, description.trim());
 
-
         st1.executeUpdate();
 
         st1.close();
 
         con.close();
 
-    
-    
-    
     }
 
     public static void updateTable() {
@@ -846,33 +775,30 @@ String zoneNum2 = "2";
         MainPage.jTable1_DisplayData.setModel(model);
 
     }
-    
-   
+
     // This method takes the entered IP address and check it in the database to see if it matches with the selected Panel ID if they match it then
     // passes the values to IP connection where it will then change the state of the Jtree selected leaf if the IP address is connected.
-    public static void CheckIpAndPanId(String ipAddress, int panelID, int portNumInput) throws SQLException, IOException{
-   
-   
-            con = DriverManager.getConnection(host);
-            System.out.println("Connected");
+    public static void CheckIpAndPanId(String ipAddress, int panelID, int portNumInput) throws SQLException, IOException {
 
-            String query1 = "SELECT * FROM db_accessadmin.Fire_Panel_Data WHERE panelID=" + panelID + "AND ipAddress LIKE'%" + ipAddress + "%'";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(query1);
-      
-            while (rs.next()) {
+        con = DriverManager.getConnection(host);
+        System.out.println("Connected");
+
+        String query1 = "SELECT * FROM db_accessadmin.Fire_Panel_Data WHERE panelID=" + panelID + "AND ipAddress LIKE'%" + ipAddress + "%'";
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(query1);
+
+        while (rs.next()) {
 
             panelID1 = rs.getInt("panelID");
             ipAddress1 = rs.getString("ipAddress");
-   
+
         }
-            IpConnection.IpConnect(portNumInput, ipAddress, panelID);
-            
+        IpConnection.IpConnect(portNumInput, ipAddress, panelID);
+
         con.close();
         st.close();
         rs.close();
-   
-   }
 
+    }
 
 }
