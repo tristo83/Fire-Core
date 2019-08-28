@@ -332,7 +332,7 @@ public class MainPage extends javax.swing.JFrame {
 
         int jTreeIndexNum = model.getSelectionRows()[0];
 
-        SqlAddPanel.sqlAddPanel(jTreeIndexNum);
+       
     }//GEN-LAST:event_jMenuItemAddActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
