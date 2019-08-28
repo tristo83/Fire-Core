@@ -5,8 +5,8 @@
  */
 package FireCore;
 
-
 import static FireCore.MainPage.jTree1;
+import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,7 +28,12 @@ import java.util.TimerTask;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import javax.swing.JTree;
+import javax.swing.UIManager;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
@@ -43,37 +48,21 @@ public class IpConnection {
     static Scanner scanner;
     static Timer time = new Timer();
 
-    public static void IpConnect(int portNumInput, String ipAddress) throws IOException, SQLException {
+    public static void IpConnect(int portNumInput, String ipAddress, int panelID) throws IOException, SQLException {
 
-        try {
-            smtpSocket = new Socket(InetAddress.getByName(ipAddress), portNumInput);
+        smtpSocket = new Socket(InetAddress.getByName(ipAddress), portNumInput);
 
-            os = new DataOutputStream(smtpSocket.getOutputStream());
-            reader = new BufferedReader(new InputStreamReader(smtpSocket.getInputStream()));
-            in = new DataInputStream(smtpSocket.getInputStream());
-            scanner = new Scanner(smtpSocket.getInputStream());
+        os = new DataOutputStream(smtpSocket.getOutputStream());
+        reader = new BufferedReader(new InputStreamReader(smtpSocket.getInputStream()));
+        in = new DataInputStream(smtpSocket.getInputStream());
+        scanner = new Scanner(smtpSocket.getInputStream());
 
-            System.out.println("Connected with ip " + ipAddress + " and port " + portNumInput);
+        System.out.println("Connected with ip " + ipAddress + " and port " + portNumInput);
 
-            if (smtpSocket.isConnected()) {
+        if (smtpSocket.isConnected()) {
 
-                Icon firePanel = new ImageIcon("src/icons/Untitled.png");
+            writeData();
 
-                DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
-
-                renderer.setLeafIcon(firePanel);
-
-                jTree1.setCellRenderer(renderer);
-
-                writeData();
-                
-
-            }
-
-        } catch (UnknownHostException ex) {
-            System.out.println(ex);
-        } catch (IOException ex) {
-            System.out.println(ex);
         }
 
     }
@@ -92,13 +81,12 @@ public class IpConnection {
                 byte[] redData;
                 StringBuilder clientData = new StringBuilder();
                 String redDataText = null;
-                
-               
+
                 try {
                     while ((red = smtpSocket.getInputStream().read(buffer)) > -1) {
                         redData = new byte[red];
                         System.arraycopy(buffer, 0, redData, 0, red);
-                        
+
                         try {
                             redDataText = new String(redData, "UTF-8"); // assumption that client sends data UTF-8 encoded
                         } catch (UnsupportedEncodingException ex) {
@@ -106,13 +94,13 @@ public class IpConnection {
                         }
 
                         Date todaysDate = new Date();
-                        
+
                         DateFormat df = new SimpleDateFormat("dd/MM/yy");
                         DateFormat df1 = new SimpleDateFormat("hh:mm:ss a");
                         String testDateString = df.format(todaysDate);
                         String testTime = df1.format(todaysDate);
-                        
-                       SqlFunctions.sqlPanelHistory(redDataText, testDateString, testTime );
+
+                        SqlFunctions.sqlPanelHistory(redDataText, testDateString, testTime);
 
 //                        System.out.println(redDataText);
 //             clientData.append(redDataText);
@@ -130,7 +118,6 @@ public class IpConnection {
 
     }
 
-      
     public static void closeConnections() throws IOException, IOException {
 
         smtpSocket.close();
@@ -153,32 +140,26 @@ public class IpConnection {
 
     }
 
-
 // checkIpConnection still needs work to make it right    
-public static void checkIpConnection(){
+    public static void checkIpConnection() {
 
-
-        
-
-InetAddress geek = null; 
-            try {
-                geek = InetAddress.getByName("192.168.1.10");
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+        InetAddress geek = null;
+        try {
+            geek = InetAddress.getByName("192.168.1.10");
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Sending Ping Request to " + "192.168.1.10");
+        try {
+            if (geek.isReachable(5000)) {
+                System.out.println("Host is reachable");
+            } else {
+                System.out.println("Sorry ! We can't reach to this host");
             }
-    System.out.println("Sending Ping Request to " + "192.168.1.10"); 
-            try {
-                if (geek.isReachable(5000))
-                    System.out.println("Host is reachable");
-                else 
-                    System.out.println("Sorry ! We can't reach to this host");
-            } catch (IOException ex) {
-                Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-  } 
+        } catch (IOException ex) {
+            Logger.getLogger(IpConnection.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
 }
-  
-
-  
-
-
