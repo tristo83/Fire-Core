@@ -35,6 +35,8 @@ public class SqlFunctions {
 private static String sql;
 static String host = "jdbc:sqlserver://127.0.0.1:1433;databaseName=FirePanel;user=FirePanel;password=elisha83";
 private static Connection con;
+private static int panelID1;
+private static String ipAddress1;
     
     
     public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException, IOException {
@@ -844,6 +846,30 @@ String zoneNum2 = "2";
         MainPage.jTable1_DisplayData.setModel(model);
 
     }
+    
+   public static void CheckIpAndPanId(String ipAddress, int panelID, int portNumInput) throws SQLException, IOException{
+   
+   
+            con = DriverManager.getConnection(host);
+            System.out.println("Connected");
+
+            String query1 = "SELECT * FROM db_accessadmin.Fire_Panel_Data WHERE panelID=" + panelID + "AND ipAddress LIKE'%" + ipAddress + "%'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query1);
+      
+            while (rs.next()) {
+
+            panelID1 = rs.getInt("panelID");
+            ipAddress1 = rs.getString("ipAddress");
+   
+        }
+            IpConnection.IpConnect(portNumInput, ipAddress, panelID);
+            
+        con.close();
+        st.close();
+        rs.close();
+   
+   }
 
 
 }
