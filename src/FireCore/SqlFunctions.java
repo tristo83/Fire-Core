@@ -847,7 +847,10 @@ String zoneNum2 = "2";
 
     }
     
-   public static void CheckIpAndPanId(String ipAddress, int panelID, int portNumInput) throws SQLException, IOException{
+   
+    // This method takes the entered IP address and check it in the database to see if it matches with the selected Panel ID if they match it then
+    // passes the values to IP connection where it will then change the state of the Jtree selected leaf if the IP address is connected.
+    public static void CheckIpAndPanId(String ipAddress, int panelID, int portNumInput) throws SQLException, IOException{
    
    
             con = DriverManager.getConnection(host);
