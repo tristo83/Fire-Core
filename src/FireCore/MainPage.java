@@ -338,36 +338,36 @@ public class MainPage extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit this will disconnect all panels?", "Exit", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if (p == 0) {
-
-            dispose();
-
-        } else if (p == 1) {
-
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        } else if (p == 2) {
-
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        switch (p) {
+            case 0:
+                dispose();
+                break;
+            case 1:
+                setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                break;
+            case 2:
+                setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int p = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit, this will disconnect all panels?", "Exit", JOptionPane.YES_NO_CANCEL_OPTION);
 
-        if (p == 0) {
-
-            dispose();
-
-        } else if (p == 1) {
-
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        } else if (p == 2) {
-
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        switch (p) {
+            case 0:
+                dispose();
+                break;
+            case 1:
+                setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                break;
+            case 2:
+                setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
