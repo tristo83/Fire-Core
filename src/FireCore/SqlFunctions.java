@@ -23,6 +23,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -389,7 +391,7 @@ public class SqlFunctions {
                     PanelSetUpPage.panelNumDisplay.setText(Integer.toString(id));
                     PanelSetUpPage.bldNamFeild.setText(bldName);
                     PanelSetUpPage.selectSidNum.setText(Integer.toString(sidNumber));
-                    PanelSetUpPage.PorttNumInput.setText(Integer.toString(portNum));
+                    PanelSetUpPage.PortNumInput.setText(Integer.toString(portNum));
                     PanelSetUpPage.ipAddressInput.setText(ipAddress);
 
                     st.close();
@@ -800,5 +802,40 @@ public class SqlFunctions {
         rs.close();
 
     }
+    
+    
+  public static void SqlretreivePanManufac(){
+  
+   // This function needs to be moved to SqlFunctions
+        
+        Connection con = null;
+        try {
+            con = DriverManager.getConnection(host);
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Connected");
+        String query = "SELECT * FROM db_accessadmin.Fire_Panel_Brands";
+        Statement st = null;
+        try {
+            st = con.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+
+                String panelBrand = rs.getString("ManufacturerName");
+
+                PanelSetUpPage.fipBrandSelection.addItem(panelBrand);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+  
+  }  
 
 }
