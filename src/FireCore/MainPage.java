@@ -292,6 +292,7 @@ public class MainPage extends javax.swing.JFrame {
                 if (test != 1) {
 
                     new PanelSetUpPage().setVisible(true);
+                    SqlFunctions.SqlretreivePanManufac();
                     SqlFunctions.ShowPanInfo();
 
                 } else if (evt.getClickCount() == 1) {
