@@ -30,9 +30,9 @@ public class PanelSetUpPage extends javax.swing.JFrame {
 
     private static String bldNameInput = null;
     private static int sidNumInput;
-    private static int portNumInput;
+    public static int portNumInput;
     private static int panelID;
-    private static String ipAddress;
+    public static String ipAddress;
     private static String manufacturer;
     private static final String ipAddressPattern = "^([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|[0-5])$";
     private Pattern pattern;
@@ -44,7 +44,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         bldNameInput = bldNamFeild.getText();
         sidNumInput = Integer.parseInt(selectSidNum.getText());
         ipAddress = ipAddressInput.getText();
-        portNumInput = Integer.parseInt(PorttNumInput.getText());
+        portNumInput = Integer.parseInt(PortNumInput.getText());
         manufacturer = fipBrandSelection.getSelectedItem().toString();
 
         SqlFunctions.SqlUpdateSiteInfo(bldNameInput, sidNumInput, ipAddress, portNumInput, manufacturer);
@@ -59,7 +59,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
 
         System.out.println(matcher.matches());
 
-        portNumInput = Integer.parseInt(PorttNumInput.getText());
+        portNumInput = Integer.parseInt(PortNumInput.getText());
         panelID = Integer.parseInt(panelNumDisplay.getText());
 
         SqlFunctions.CheckIpAndPanId(ipAddress, panelID, portNumInput);
@@ -93,13 +93,19 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         selectSidNum = new javax.swing.JTextField();
         fipBrandSelection = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        PorttNumInput = new javax.swing.JTextField();
-        ipAddressInput = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jButtonPanelConnect = new javax.swing.JButton();
         panelDisconect = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        mx1Panel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        PortNumInput = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        ipAddressInput = new javax.swing.JTextField();
+        ampacPanel = new javax.swing.JLayeredPane();
+        jLabel4 = new javax.swing.JLabel();
+        panel1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        editFields = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         savePanelInfo = new javax.swing.JMenuItem();
@@ -142,31 +148,25 @@ public class PanelSetUpPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bldNameLab)
-                            .addComponent(mainSiteNamelab)
-                            .addComponent(bldNamFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                            .addComponent(mainSiteNameInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(sidNumLab)
-                                    .addGap(72, 72, 72))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(selectSidNum, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(81, 81, 81))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(panelNumLab)
-                                    .addContainerGap()))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(panelNumDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92))))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(fipBrandSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(bldNameLab)
+                                    .addComponent(mainSiteNamelab)
+                                    .addComponent(bldNamFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                    .addComponent(mainSiteNameInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(126, 126, 126)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(panelNumLab)
+                                    .addComponent(selectSidNum, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(panelNumDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sidNumLab))))
+                            .addComponent(fipBrandSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 27, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,46 +189,9 @@ public class PanelSetUpPage extends javax.swing.JFrame {
                     .addComponent(selectSidNum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fipBrandSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Network"));
-
-        jLabel1.setText("Port Num:");
-
-        jLabel2.setText("IP Address:");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PorttNumInput, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                    .addComponent(ipAddressInput, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PorttNumInput, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(14, 14, 14)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ipAddressInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(26, 26, 26))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jButtonPanelConnect.setText("Connect");
@@ -242,6 +205,113 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         panelDisconect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 panelDisconectActionPerformed(evt);
+            }
+        });
+
+        mx1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("MX1 Network"));
+
+        jLabel1.setText("Port Number:");
+
+        PortNumInput.setText("jTextField1");
+
+        jLabel2.setText("IP Address:");
+
+        ipAddressInput.setText("jTextField2");
+
+        javax.swing.GroupLayout mx1PanelLayout = new javax.swing.GroupLayout(mx1Panel);
+        mx1Panel.setLayout(mx1PanelLayout);
+        mx1PanelLayout.setHorizontalGroup(
+            mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mx1PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ipAddressInput, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PortNumInput, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        mx1PanelLayout.setVerticalGroup(
+            mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mx1PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PortNumInput, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(mx1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(ipAddressInput, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        ampacPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Ampac Network"));
+
+        jLabel4.setText("FUCK YOU");
+
+        ampacPanel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout ampacPanelLayout = new javax.swing.GroupLayout(ampacPanel);
+        ampacPanel.setLayout(ampacPanelLayout);
+        ampacPanelLayout.setHorizontalGroup(
+            ampacPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ampacPanelLayout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
+        );
+        ampacPanelLayout.setVerticalGroup(
+            ampacPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ampacPanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.setLayer(mx1Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(ampacPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mx1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addGap(6, 6, 6)
+                    .addComponent(ampacPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mx1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(ampacPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(203, Short.MAX_VALUE)))
+        );
+
+        panel1.setText("Panel 1");
+        panel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                panel1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Panel 2");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        editFields.setText("Edit Fields");
+        editFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFieldsActionPerformed(evt);
             }
         });
 
@@ -275,30 +345,45 @@ public class PanelSetUpPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButtonPanelConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelDisconect, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panel1)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLayeredPane1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(editFields, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonPanelConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelDisconect)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(panel1)
+                    .addComponent(jButton1))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonPanelConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelDisconect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPanelConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(editFields, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -348,6 +433,7 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     private void savePanelInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePanelInfoActionPerformed
 
         GetPanelInfo();
+        
     }//GEN-LAST:event_savePanelInfoActionPerformed
 
     private void exitPanelSetUpPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitPanelSetUpPageActionPerformed
@@ -356,35 +442,29 @@ public class PanelSetUpPage extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        Connection con = null;
-        try {
-            con = DriverManager.getConnection(host);
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Connected");
-        String query = "SELECT * FROM db_accessadmin.Fire_Panel_Brands";
-        Statement st = null;
-        try {
-            st = con.createStatement();
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-
-                String panelBrand = rs.getString("ManufacturerName");
-
-                fipBrandSelection.addItem(panelBrand);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelSetUpPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+       PortNumInput.setEnabled(false);
+       ipAddressInput.setEnabled(false);
+       fipBrandSelection.setEnabled(false);
 
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void panel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panel1ActionPerformed
+       mx1Panel.setVisible(true);
+       ampacPanel.setVisible(false);
+    }//GEN-LAST:event_panel1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          mx1Panel.setVisible(false);
+       ampacPanel.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void editFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFieldsActionPerformed
+        PortNumInput.setEnabled(true);
+        ipAddressInput.setEnabled(true);
+       fipBrandSelection.setEnabled(true);
+    }//GEN-LAST:event_editFieldsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -424,23 +504,29 @@ public class PanelSetUpPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JTextField PorttNumInput;
+    public static javax.swing.JTextField PortNumInput;
+    public static javax.swing.JLayeredPane ampacPanel;
     public static javax.swing.JTextField bldNamFeild;
     private javax.swing.JLabel bldNameLab;
+    private javax.swing.JButton editFields;
     private javax.swing.JMenuItem exitPanelSetUpPage;
-    private static javax.swing.JComboBox<String> fipBrandSelection;
+    public static javax.swing.JComboBox<String> fipBrandSelection;
     public static javax.swing.JTextField ipAddressInput;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonPanelConnect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     public static javax.swing.JLabel mainSiteNameInput;
     private javax.swing.JLabel mainSiteNamelab;
+    public static javax.swing.JPanel mx1Panel;
+    private javax.swing.JButton panel1;
     private javax.swing.JButton panelDisconect;
     public static javax.swing.JLabel panelNumDisplay;
     private javax.swing.JLabel panelNumLab;
