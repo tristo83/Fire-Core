@@ -38,6 +38,7 @@ public class SqlFunctions {
     private static Connection con;
     private static int panelID1;
     private static String ipAddress1;
+    public static String manufacturer = null;
 
     public static void sqlSiteSetUp(String mainSiteName, int panNumSetUp) throws ClassNotFoundException, IOException {
 
@@ -351,7 +352,13 @@ public class SqlFunctions {
     }
 
     public static void ShowPanInfo() {
-
+            int id;
+            String sitename;
+            String bldName;
+            int sidNumber = 0;
+            int portNum;
+            String ipAddress;
+            
         TreeSelectionModel model = jTree1.getSelectionModel();
 
         int test = model.getSelectionRows()[0];
@@ -360,12 +367,7 @@ public class SqlFunctions {
 
         try {
 
-            int id;
-            String sitename;
-            String bldName;
-            int sidNumber = 0;
-            int portNum;
-            String ipAddress;
+            
 
             con = DriverManager.getConnection(host);
             System.out.println("Connected");
@@ -378,14 +380,13 @@ public class SqlFunctions {
 
                 if (id == test) {
 
-                    System.out.println(id);
+                
                     sitename = rs.getString("mainSiteName");
-                    System.out.println(sitename);
                     bldName = rs.getString("bldName");
-
                     sidNumber = rs.getInt("sidNum");
                     portNum = rs.getInt("portNum");
                     ipAddress = rs.getString("ipAddress");
+                    manufacturer = rs.getString("manufacturer");
 
                     PanelSetUpPage.mainSiteNameInput.setText(sitename);
                     PanelSetUpPage.panelNumDisplay.setText(Integer.toString(id));
@@ -393,7 +394,7 @@ public class SqlFunctions {
                     PanelSetUpPage.selectSidNum.setText(Integer.toString(sidNumber));
                     PanelSetUpPage.PortNumInput.setText(Integer.toString(portNum));
                     PanelSetUpPage.ipAddressInput.setText(ipAddress);
-
+                    
                     st.close();
                     con.close();
 
@@ -409,8 +410,19 @@ public class SqlFunctions {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
+       System.out.println(PanelSetUpPage.fipBrandSelection.getItemCount()); 
+      for (int i=0; i<PanelSetUpPage.fipBrandSelection.getItemCount(); i++) {
+      if (PanelSetUpPage.fipBrandSelection.getItemAt(i).equals(manufacturer)) {
+        PanelSetUpPage.fipBrandSelection.setSelectedIndex(i);
+     
+        break;
+      }
+       
+       
     }
+    
+    } 
+    
 
     private static String date;
     private static String time;
@@ -806,7 +818,7 @@ public class SqlFunctions {
     
   public static void SqlretreivePanManufac(){
   
-   // This function needs to be moved to SqlFunctions
+ 
         
         Connection con = null;
         try {
